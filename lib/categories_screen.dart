@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mealsapp/categoryitem.dart';
+import './dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -14,9 +16,8 @@ class CategoriesScreen extends StatelessWidget {
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),
-      children: <Widget>[
-        
-      ],
+      // mapping dummy categories to categoryitem and which will return the container we want
+      children: DUMMY_CATEGORIES.map((catData)=>CategoryItem(catData.title, catData.color)).toList(),
     );
   }
 }
