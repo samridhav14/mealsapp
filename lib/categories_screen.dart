@@ -21,7 +21,7 @@ class CategoriesScreen extends StatelessWidget {
         mainAxisSpacing: 20,
       ),
       // mapping dummy categories to categoryitem and which will return the container we want
-      children: DUMMY_CATEGORIES.map((catData)=>CategoryItem(catData.title, catData.color)).toList(),
+      children: DUMMY_CATEGORIES.map((catData)=>CategoryItem(catData.id ,catData.title, catData.color)).toList(),
     )
     );
   }
