@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/categoryitem.dart';
+import './category_meals_screen.dart';
 import './categories_screen.dart';
 
 void main() => runApp(MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
             color: Color.fromRGBO(20, 51, 51, 1),
           ),
           bodyMedium: TextStyle(
-            color: Color.fromRGBO(20, 51, 51, 1),
+            color: Color.fromRGBO(20    , 51, 51, 1),
           ),
           titleLarge: TextStyle(
             fontSize: 20,
@@ -27,7 +29,14 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // here home is the first widget class that will appear we are setting it to category screen because we want that to get rendered first
-      home:  CategoriesScreen(),
+     // home:  CategoriesScreen(),
+      routes: {
+        // setting category screen as initial route
+        '/' : (ctx)=>CategoriesScreen(),
+        //'/categories-meals' : (ctx)=>CategoryMealsScreen() ,
+        // simpllar way for writing
+        CategoryItem.routeName: (ctx)=>CategoryMealsScreen() ,
+      },
     );
   }
 }
