@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mealsapp/categoryitem.dart';
+import './categoryitem.dart';
 import './dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +10,12 @@ class CategoriesScreen extends StatelessWidget {
     // slivers are scrolable area on screens this with Crossaxis extent work on the app to store as many items we need to show here 200 show how many pixel it would take for every element
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DeliMeals'),
+        title:  Text('DeliMeals'),
       ),
       body:     GridView(
+        padding: const EdgeInsets.all(25),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
+        maxCrossAxisExtent: 300,
         childAspectRatio: 3/2,
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
