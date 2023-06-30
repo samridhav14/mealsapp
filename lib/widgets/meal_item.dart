@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import '../screens/meal_detail.dart';
 import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
   final String title;
+  final String id;
   final String imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
   MealItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.duration,
@@ -40,12 +43,14 @@ class MealItem extends StatelessWidget {
    }
   }
 
-  void seclectMeal() => Null;
+  void seclectMeal(BuildContext context){
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id,);
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => seclectMeal(),
+      onTap: () => seclectMeal(context),
       // we will display a card for each meal for that we are changing the shape of card in rectangular border with border radius as 15
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

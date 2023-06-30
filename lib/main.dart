@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/widgets/categoryitem.dart';
+import './screens/meal_detail.dart';
+import './widgets/categoryitem.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/categories_screen.dart';
 
@@ -36,6 +37,15 @@ class MyApp extends StatelessWidget {
         //'/categories-meals' : (ctx)=>CategoryMealsScreen() ,
         // simpllar way for writing
         CategoryItem.routeName: (ctx)=>CategoryMealsScreen() ,
+        MealDetailScreen.routeName: (ctx)=>MealDetailScreen() ,
+      },
+      // speacial things given by flutter this is basically used when a condition appears where we genrate a route which is not present in routes table
+      // onGenerateRoute: (settings){
+      //   return MaterialPageRoute(builder: (ctx)=>CategoriesScreen());
+      // },
+      // this is used as a backup if some unknown route is there show some default screen this is a good practise to add it
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx)=>CategoriesScreen());
       },
     );
   }
