@@ -44,9 +44,9 @@ class MyApp extends StatelessWidget {
       //   return MaterialPageRoute(builder: (ctx)=>CategoriesScreen());
       // },
       // this is used as a backup if some unknown route is there show some default screen this is a good practise to add it
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(builder: (ctx)=>CategoriesScreen());
-      },
+      // onUnknownRoute: (settings) {
+      //   return MaterialPageRoute(builder: (ctx)=>CategoriesScreen());
+      // },
     );
   }
 }
