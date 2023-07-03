@@ -9,9 +9,10 @@ class CategoriesScreen extends StatelessWidget {
     // we are using grid view to put items side by side in a list
     // slivers are scrolable area on screens this with Crossaxis extent work on the app to store as many items we need to show here 200 show how many pixel it would take for every element
     return Scaffold(
-      appBar: AppBar(
-        title:  Text('DeliMeals'),
-      ),
+      // here we have rwmoved the scafold becaus tabs screen will provide it
+      // appBar: AppBar(
+      //   title:  Text('DeliMeals'),
+      // ),
       body:     GridView(
         padding: const EdgeInsets.all(25),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
