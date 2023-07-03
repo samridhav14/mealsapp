@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../screens/filters.dart';
+
 class MainDrawer extends StatelessWidget {
   // we are using bulder so that we do not need to copy code again 
-  Widget buildListTile(String title, IconData icon) {
+  Widget buildListTile(String title, IconData icon,Function screen) {
     return ListTile(
       leading: Icon(
         icon,
@@ -17,9 +19,7 @@ class MainDrawer extends StatelessWidget {
         ),
       ),
       // this will tell which screen to render
-      onTap: () {
-        // ...
-      },
+      onTap: screen,
     );
   }
 
@@ -49,10 +49,18 @@ class MainDrawer extends StatelessWidget {
           buildListTile(
             'Meals',
             Icons.restaurant_menu,
+            (){
+              // we use push replacement so that no stack overflow happens
+              Navigator.of(context).pushReplacementNamed('/');
+            }
           ),
           buildListTile(
             'Filters',
             Icons.settings,
+            (){
+               // we use push replacement so that no stack overflow happens
+                Navigator.of(context).pushReplacementNamed(FilterScreen.routeName);
+            }
           ),
         ],
       ),

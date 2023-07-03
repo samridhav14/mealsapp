@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/filters.dart';
 import './screens/tabs_screen.dart';
 import './screens/meal_detail.dart';
 import './widgets/categoryitem.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         // simpllar way for writing
         CategoryItem.routeName: (ctx)=>CategoryMealsScreen() ,
         MealDetailScreen.routeName: (ctx)=>MealDetailScreen() ,
+        FilterScreen.routeName: (ctx)=>FilterScreen(),
       },
       // speacial things given by flutter this is basically used when a condition appears where we genrate a route which is not present in routes table
       // onGenerateRoute: (settings){
