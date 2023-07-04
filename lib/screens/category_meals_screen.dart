@@ -27,6 +27,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   }
   // it runs whenever dependancies of this state change
 // so it overwrite the removal part we need to control it 
+// we used did change dependency init cant use context
  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
