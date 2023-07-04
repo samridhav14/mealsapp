@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
   MealItem({
     @required this.id,
     @required this.title,
@@ -16,35 +17,47 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
+    @required this.removeItem,
   });
   // getter for extracting values from enums
-  String get ComplexityText{
-   switch(complexity){
-    case Complexity.Simple:
-    return 'Simple';
-    case Complexity.Challenging:
-    return 'Challenging';
-    case Complexity.Hard:
-    return 'Hard';
-    default:
-    return 'Unknown';
-   }
-  }
-  String get AffordabilityText{
-   switch(affordability){
-    case  Affordability.Affordable:
-    return 'Affordable';
-    case Affordability.Pricey:
-    return 'Pricey';
-    case Affordability.Luxurious:
-    return 'Luxurious';
-    default:
-    return 'Unknown';
-   }
+  String get ComplexityText {
+    switch (complexity) {
+      case Complexity.Simple:
+        return 'Simple';
+      case Complexity.Challenging:
+        return 'Challenging';
+      case Complexity.Hard:
+        return 'Hard';
+      default:
+        return 'Unknown';
+    }
   }
 
-  void seclectMeal(BuildContext context){
-    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id,);
+  String get AffordabilityText {
+    switch (affordability) {
+      case Affordability.Affordable:
+        return 'Affordable';
+      case Affordability.Pricey:
+        return 'Pricey';
+      case Affordability.Luxurious:
+        return 'Luxurious';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  void seclectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+      // here then executes when we pop back from meal detail skill 
+      //if we poped back through back button then result will be null and we need not to do anything otherwise 
+      //if we deleted it a meal id will come and we need to delete the details
+    ).then((result){
+        if(result!=null){
+          removeItem(result);
+          }
+    });
   }
 
   @override
@@ -118,8 +131,6 @@ class MealItem extends StatelessWidget {
                       SizedBox(width: 6),
                       Text(AffordabilityText),
                     ]),
-                 
-
                   ],
                 ))
           ],

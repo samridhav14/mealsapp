@@ -86,6 +86,15 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+       child: Icon(Icons.delete,color: Colors.red),
+       onPressed: () {
+        // pop helps us to remove the present screen given that there is some other screen behind it modal bottom sheet also works like this internally
+        // this basically shows that we want to remove this dish for some time which have id as meal id
+         Navigator.of(context).pop(mealId);
+       },
+      ),
     );
   }
 }
