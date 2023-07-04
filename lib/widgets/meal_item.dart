@@ -9,7 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  final Function removeItem;
+  //final Function removeItem;
   MealItem({
     @required this.id,
     @required this.title,
@@ -17,7 +17,7 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
-    @required this.removeItem,
+    //@required this.removeItem,
   });
   // getter for extracting values from enums
   String get ComplexityText {
@@ -53,11 +53,11 @@ class MealItem extends StatelessWidget {
       // here then executes when we pop back from meal detail skill 
       //if we poped back through back button then result will be null and we need not to do anything otherwise 
       //if we deleted it a meal id will come and we need to delete the details
-    ).then((result){
-        if(result!=null){
-          removeItem(result);
-          }
-    });
+    );//.then((result){
+  //       if(result!=null){
+  //         removeItem(result);
+  //         }
+  //   });
   }
 
   @override

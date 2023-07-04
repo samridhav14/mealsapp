@@ -4,6 +4,10 @@ import '../dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
+  final Function toggleFavorite;
+  final Function isFavorite;
+
+  MealDetailScreen(this.toggleFavorite, this.isFavorite);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -87,13 +91,19 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-       child: Icon(Icons.delete,color: Colors.red),
-       onPressed: () {
-        // pop helps us to remove the present screen given that there is some other screen behind it modal bottom sheet also works like this internally
-        // this basically shows that we want to remove this dish for some time which have id as meal id
-         Navigator.of(context).pop(mealId);
-       },
+        // this was just to see how pop thing works
+      //   backgroundColor: Colors.white,
+      //  child: Icon(Icons.delete,color: Colors.red),
+      //  onPressed: () {
+      //   // pop helps us to remove the present screen given that there is some other screen behind it modal bottom sheet also works like this internally
+      //   // this basically shows that we want to remove this dish for some time which have id as meal id
+      //    Navigator.of(context).pop(mealId);
+      //  },
+      // to add meals in fav and unfav
+       child: Icon(
+           isFavorite(mealId) ? Icons.favorite : Icons.favorite_border,
+        ),
+        onPressed: () => toggleFavorite(mealId),
       ),
     );
   }

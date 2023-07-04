@@ -1,25 +1,39 @@
 import 'package:flutter/material.dart';
+import '../models/meal.dart';
 import '../widgets/main_drawer.dart';
 import '../screens/categories_screen.dart';
 import './favourites_screen.dart';
 
 class TabsScreen extends StatefulWidget {
+  final List<Meal> favoritemeals;
+  TabsScreen(this.favoritemeals);
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
   // we can use a list of map if we want more customization for example diff app bar for different creens
-  final List<Widget> _pages=[
+  List<Widget> _pages;
+  int _selectedPagedIndex = 0;
+
+
+
+// here we have used init state because we want to us widget.favmeals  
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
       CategoriesScreen(),
-      FavoritesScreen(),
-  ];
-   int _selectedPagedIndex=0;
-  void _selectPage(int index){
-      setState(() {
-        _selectedPagedIndex=index;
-      });
+      FavoritesScreen(widget.favoritemeals),
+    ];
   }
+
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPagedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // // if we want to add tabs at the top after app bar we use defaulttab controller
@@ -54,29 +68,29 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text('Meals'),
       ),
       // adding page drawer
-    drawer: MainDrawer(),
+      drawer: MainDrawer(),
       body: _pages[_selectedPagedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        selectedItemColor: Theme.of(context).colorScheme.secondary,
-        unselectedItemColor: Colors.white,
-        // to change present and rest screen we can use selected index
-        currentIndex: _selectedPagedIndex,
-       // type: BottomNavigationBarType.shifting,
-        items: [
-          // there are two tabs we need to show
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            icon: Icon(Icons.category),
-            label: 'Categories',
+          onTap: _selectPage,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          selectedItemColor: Theme.of(context).colorScheme.secondary,
+          unselectedItemColor: Colors.white,
+          // to change present and rest screen we can use selected index
+          currentIndex: _selectedPagedIndex,
+          // type: BottomNavigationBarType.shifting,
+          items: [
+            // there are two tabs we need to show
+            BottomNavigationBarItem(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              icon: Icon(Icons.category),
+              label: 'Categories',
             ),
-          BottomNavigationBarItem(
-             backgroundColor: Theme.of(context).colorScheme.primary,
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
+            BottomNavigationBarItem(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
             ),
-        ]),
+          ]),
     );
   }
 }
