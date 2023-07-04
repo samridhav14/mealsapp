@@ -3,11 +3,57 @@ import '../screens/filters.dart';
 import './screens/tabs_screen.dart';
 import './screens/meal_detail.dart';
 import './widgets/categoryitem.dart';
+import 'dummy_data.dart';
+import 'models/meal.dart';
 import 'screens/category_meals_screen.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // initiallizing all the default values of all bool check
+  Map<String, bool> _filters = {
+    'gluten': false,
+    'lactose': false,
+    'vegan': false,
+    'vegetarian': false,
+  };
+  // total meals initially
+  List<Meal> _availableMeals = DUMMY_MEALS;
+  // meals after applying any filter
+   List<Meal> _favoriteMeals = [];
+
+   // this function will update the bool values according to which we will filtter our meals
+   void _setFilters(Map<String, bool> filterData) {
+    setState(() {
+      _filters = filterData;
+       // all the filtter conditions applied
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (_filters['gluten'] && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_filters['lactose'] && !meal.isLactoseFree) {
+          return false;
+        }
+        if (_filters['vegan'] && !meal.isVegan) {
+          return false;
+        }
+        if (_filters['vegetarian'] && !meal.isVegetarian) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,9 +83,9 @@ class MyApp extends StatelessWidget {
         '/' : (ctx)=>TabsScreen(),
         //'/categories-meals' : (ctx)=>CategoryMealsScreen() ,
         // simpllar way for writing
-        CategoryItem.routeName: (ctx)=>CategoryMealsScreen() ,
+        CategoryItem.routeName: (ctx)=>CategoryMealsScreen(_availableMeals) ,
         MealDetailScreen.routeName: (ctx)=>MealDetailScreen() ,
-        FilterScreen.routeName: (ctx)=>FilterScreen(),
+        FilterScreen.routeName: (ctx)=>FilterScreen( _filters,_setFilters),
       },
       // speacial things given by flutter this is basically used when a condition appears where we genrate a route which is not present in routes table
       // onGenerateRoute: (settings){
@@ -75,24 +121,4 @@ class MyApp extends StatelessWidget {
 
 
 
-// no need of this we are rendering categories screen
 
-// class MyHomePage extends StatefulWidget {
-//     @override
-//   _MyHomePageState createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('DeliMeals'),
-//       ),
-//       body: Center(
-//         child: Text('Navigation Time!'),
-//       ),
-//     );
-//   }
-// }

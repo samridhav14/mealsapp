@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
 import '../widgets/meal_item.dart';
-import '../dummy_data.dart';
 // we need to make it a statefull widget because we need to delete some meal
 class CategoryMealsScreen extends StatefulWidget {
- 
+  static const routeName = '/category-meals';
+
+  final List<Meal> availableMeals;
+
+  CategoryMealsScreen(this.availableMeals);
   @override
   State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
 }
@@ -37,7 +40,8 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     final categoryId = routeArgs['id'];
         categoryTitle = routeArgs['title'];
     // extracting the categories with given id from meals
-   displayMeals= DUMMY_MEALS.where((meal) {
+    // earlier we were extracting from all dummy data now we will use only the desiered data from available meal
+   displayMeals=widget.availableMeals.where((meal) {
       return meal.categories.contains(categoryId);
     }).toList();
     _loadedInitData=true;}
